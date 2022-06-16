@@ -18,7 +18,7 @@ void Xuat_danh_sach_TS(THISINH sv[], int n);
 void DS_TS_SUCCES(THISINH sv[], int n);
 void Thi_sinh_Toan_Yeu(THISINH sv[], int n);
 void swap(THISINH &a, THISINH &b);
-void SX_G_BY_DTC(THISINH sv[], int dau, int cuoi); 	// sap xep theo thuat toan quicksort
+void SX_G_BY_DTC(THISINH sv[], int &dau, int &cuoi); 	// sap xep theo thuat toan quicksort
 
 int main()
 {
@@ -34,7 +34,8 @@ int main()
 	Thi_sinh_Toan_Yeu(sv, soluong);
 	
 	// còn loi
-	SX_G_BY_DTC(sv, 1, soluong);
+	int t = 1;
+	SX_G_BY_DTC(sv, t, soluong);
 
 }
 
@@ -99,27 +100,24 @@ void swap(THISINH &a, THISINH &b)
 	a = b;
 	b = c;
 }
-void SX_G_BY_DTC(THISINH sv[], int dau, int cuoi) 
+void SX_G_BY_DTC(THISINH sv[], int &dau, int &cuoi) 
 {
-//	// sap xep theo thuat toan quicksort
-//	int i, j;
-//    if(dau >= cuoi) return;
-//    THISINH x = sv[(dau+cuoi)/2];
-//    i = dau; j = cuoi;
-//    while(i <= j) {
-//        while(sv[i].Diem_tong_cong > x.Diem_tong_cong) i++;
-//        while(sv[j].Diem_tong_cong < x.Diem_tong_cong) j--;
-//            if(i <= j)
-//            {
-//                swap(sv[i], sv[j]);
-//                i++;    j--;
-//            }
-//    }
-//    SX_G_BY_DTC(sv, dau, j);
-//    SX_G_BY_DTC(sv, i, cuoi);	
-	for(int i = 1; i<= cuoi; i++)
-		if (sv[i].Diem_tong_cong < sv[i+1].Diem_tong_cong)
-			swap(sv[i], sv[i+1]);
+	// sap xep theo thuat toan quicksort
+	int i, j;
+    if(dau >= cuoi) return;
+    THISINH x = sv[(dau+cuoi)/2];
+    i = dau; j = cuoi;
+    while(i <= j) {
+        while(sv[i].Diem_tong_cong > x.Diem_tong_cong) i++;
+        while(sv[j].Diem_tong_cong < x.Diem_tong_cong) j--;
+            if(i <= j)
+            {
+                swap(sv[i], sv[j]);
+                i++;    j--;
+            }
+    }
+    SX_G_BY_DTC(sv, dau, j);
+
 	printf("\n===============================Sap Xep Sinh Vien===============================\n");
 	for(int i = 1; i<= cuoi; i++)
 		Xuat_thong_tin(sv[i]);
